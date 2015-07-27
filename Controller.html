@@ -1,0 +1,77 @@
+<!-- /**
+* Author: Al Lestaire Acasio
+* Date Modefied: 7-27-2015 2:15 PM
+*/ -->
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app="demoApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Views and Controllers</title>
+</head>
+<body>
+
+	<div data-ng-view=""></div>
+
+	<script type="text/javascript" src="vendor/angular.min.js"></script>
+	<script type="text/javascript" src="vendor/angular-route.min.js"></script>
+
+	<script type="text/javascript">
+
+	var demoApp = angular.module('demoApp', ['ngRoute'])
+
+
+	demoApp.config(function($routeProvider) {
+		$routeProvider
+			.when('/view1',
+				{
+					controller: 'SimpleController',
+					templateUrl: 'partials/view1.html'
+				})
+			.when('/view2',
+				{
+					controller: 'SimpleController',
+					templateUrl: 'partials/view2.html'
+				})
+			.otherwise({redirectTo: '/view1'})
+	})
+
+	demoApp.factory('simpleFactory', function() {
+		var customers = [
+				{name: 'John Smith', city: 'Phoenix'},
+				{name: 'John Doe', city: 'New York'},
+				{name: 'Jane Doe', city: 'San Francisco'}
+			];
+
+			var factory = {}
+			factory.getCustomers = function() {
+				return customers
+			}
+
+
+			factory.postCustomers = function(customer) {
+
+			}
+
+			return factory
+	})
+
+	demoApp.controller('SimpleController', function ($scope, simpleFactory) {
+			$scope.customers = []
+
+			init()
+
+			function init() {
+				$scope.customers = simpleFactory.getCustomers()
+			}
+
+			$scope.addCustomer = function() {
+				$scope.customers.push({name: $scope.newCustomer.name, city: $scope.newCustomer.city})
+				$scope.newCustomer.name = ''
+				$scope.newCustomer.city = ''
+			}
+		})
+	</script>
+
+</body>
+</html>

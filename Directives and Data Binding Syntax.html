@@ -1,0 +1,27 @@
+<!-- /**
+* Author: Al Lestaire Acasio
+* Date Modefied: 7-27-2015 2:15 PM
+*/ -->
+
+<!DOCTYPE html>
+<html lang="en" data-ng-app="">
+<head>
+	<meta charset="UTF-8">
+	<title>Directives and Data Binding Syntax</title>
+</head>
+<body data-ng-init="customers = [{name: 'John Smith', city: 'Phoenix'}, {name: 'John Doe', city: 'New York'}, {name: 'Jane Doe', city: 'San Francisco'}]">
+	<div>
+		Name:
+		<br />
+		<input type="text" data-ng-model="name" >
+		<br />
+		<ul>
+			<li data-ng-repeat="cust in customers | filter: name | orderBy: 'city'">{{ cust.name | uppercase }} - {{ cust.city | lowercase }}</li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="vendor/angular.min.js"></script>
+	<script type="text/javascript" src="vendor/jquery.min.js"></script>
+
+	<script type="text/javascript" src="js/app.js"></script>	
+</body>
+</html>

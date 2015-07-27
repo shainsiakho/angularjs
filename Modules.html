@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" data-ng-app="demoApp">
+<head>
+	<meta charset="UTF-8">
+	<title>Modules and Container</title>
+</head>
+<body>
+	
+	<div data-ng-controller="SimpleController">
+		Name:
+		<br />
+		<input type="text" data-ng-model="name" >
+		<br />
+		<ul>
+			<li data-ng-repeat="cust in customers | filter: name | orderBy: 'city'">{{ cust.name | uppercase }} - {{ cust.city | lowercase }}</li>
+		</ul>
+	</div>
+	<script type="text/javascript" src="vendor/angular.min.js"></script>
+
+	<script type="text/javascript">
+		var demoApp = angular.module('demoApp', [])
+
+		demoApp.controller('SimpleController', function($scope) {
+				$scope.customers = [
+				{name: 'John Smith', city: 'Phoenix'},
+				{name: 'John Doe', city: 'New York'},
+				{name: 'Jane Doe', city: 'San Francisco'}
+			]
+		})
+	</script>
+</body>
+</html>
